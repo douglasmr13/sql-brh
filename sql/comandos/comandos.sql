@@ -92,7 +92,7 @@ delete from brh.colaborador where matricula = 'W123'
 
 delete from brh.departamento where sigla = 'SECAP'
 
--- RELATÓRIO DE CONTATO DOS COLABORADORES APÓS EXTINÇÃO DO SECAP
+-- RELATÓRIO DE CONTATO DOS COLABORADORES (APÓS EXTINÇÃO DO SECAP)
 
 select brh.colaborador.nome, brh.email_colaborador.email, brh.telefone_colaborador.numero
 from brh.colaborador 
