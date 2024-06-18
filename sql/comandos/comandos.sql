@@ -1,10 +1,10 @@
---cadastro de endereÁo do colaborador
+--cadastro de endere√ßo do colaborador
 INSERT INTO brh.endereco (cep, uf, cidade, bairro) 
 VALUES ('01928-374', 'MG', 'Belo Horizonte', 'Parque da Saudade');
 
 -- cadastro do novo colaborador
 INSERT INTO brh.colaborador (matricula, nome, cpf, salario, departamento, cep, logradouro, complemento_endereco) 
-VALUES ('Z124', 'Fulano de Tal', '098.987.876-76', '12500', 'DEPTI', '01928-374', 'Rua Legal', 'CondomÌnio Tranquilo');
+VALUES ('Z124', 'Fulano de Tal', '098.987.876-76', '12500', 'DEPTI', '01928-374', 'Rua Legal', 'Condom√≠nio Tranquilo');
 
 -- cadastro dos telefones
 INSERT INTO brh.telefone_colaborador (colaborador, numero, tipo) 
@@ -23,7 +23,7 @@ VALUES ('Z124', 'fulanodetal@corporativo.com', 'T');
 -- cadastro de dependentes
 
 INSERT INTO brh.dependente (cpf, colaborador, nome, parentesco, data_nascimento) 
-VALUES ('111.333.555-77', 'Z124', 'Cicrana de Tal', 'C√¥njuge', to_date('1990-03-27', 'yyyy-mm-dd'));
+VALUES ('111.333.555-77', 'Z124', 'Cicrana de Tal', 'C√É¬¥njuge', to_date('1990-03-27', 'yyyy-mm-dd'));
 
 INSERT INTO brh.dependente (cpf, colaborador, nome, parentesco, data_nascimento) 
 VALUES ('222.444.666-88', 'Z124', 'Beltrana de Tal', 'Filho(a)', to_date('2021-03-11', 'yyyy-mm-dd'));
@@ -36,9 +36,9 @@ VALUES (5, 'BI', 'A123', to_date('2024-06-17', 'yyyy-mm-dd'), null);
 -- cadastro de papel
 
 INSERT INTO brh.papel (id, nome) 
-VALUES (8, 'Especialista de NegÛcios');
+VALUES (8, 'Especialista de Neg√≥cios');
 
--- atribuiÁ„o ao projeto
+-- atribui√ß√£o ao projeto
 
 INSERT INTO brh.atribuicao (projeto, colaborador, papel) 
 VALUES (5, 'Z124', 8);
@@ -55,44 +55,44 @@ inner join brh.dependente
 on brh.dependente.colaborador = brh.colaborador.matricula
 order by brh.colaborador.nome, brh.dependente.nome;
 
--- EXCLUS√O DEPARTAMENTO SECAP
+-- EXCLUS√ÉO DEPARTAMENTO SECAP
 
 --consulta
 select * from brh.colaborador where departamento = 'SECAP'
--- matrÌculas impactadas = H123, M123, R123, W123
+-- matr√≠culas impactadas = H123, M123, R123, W123
 
---exclus„o dependentes
+--exclus√£o dependentes
 delete from brh.dependente where colaborador = 'H123'
 delete from brh.dependente where colaborador = 'M123'
 delete from brh.dependente where colaborador = 'R123'
 delete from brh.dependente where colaborador = 'W123'
 
---exclus„o e-mail
+--exclus√£o e-mail
 
 delete from brh.email_colaborador where colaborador = 'H123'
 delete from brh.email_colaborador where colaborador = 'M123'
 delete from brh.email_colaborador where colaborador = 'R123'
 delete from brh.email_colaborador where colaborador = 'W123'
 
--- exclus„o telefone
+-- exclus√£o telefone
 
 delete from brh.telefone_colaborador where colaborador = 'H123'
 delete from brh.telefone_colaborador where colaborador = 'M123'
 delete from brh.telefone_colaborador where colaborador = 'R123'
 delete from brh.telefone_colaborador where colaborador = 'W123'
 
--- exclus„o colaborador
+-- exclus√£o colaborador
 
 delete from brh.colaborador where matricula = 'H123'
 delete from brh.colaborador where matricula = 'M123'
 delete from brh.colaborador where matricula = 'R123'
 delete from brh.colaborador where matricula = 'W123'
 
--- exclus„o departamento
+-- exclus√£o departamento
 
 delete from brh.departamento where sigla = 'SECAP'
 
--- RELAT”RIO DE CONTATO DOS COLABORADORES (AP”S EXTIN«√O DO SECAP)
+-- RELAT√ìRIO DE CONTATO DOS COLABORADORES AP√ìS EXTIN√á√ÉO DO SECAP
 
 select brh.colaborador.nome, brh.email_colaborador.email, brh.telefone_colaborador.numero
 from brh.colaborador 
