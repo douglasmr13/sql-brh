@@ -42,3 +42,71 @@ VALUES (8, 'Especialista de Negócios');
 
 INSERT INTO brh.atribuicao (projeto, colaborador, papel) 
 VALUES (5, 'Z124', 8);
+
+-- consulta sigla e nome departamento
+
+select nome, sigla from brh.departamento order by nome;
+
+-- consulta nomes dos dependentes
+
+select brh.colaborador.nome as colaborador, brh.dependente.nome as dependente, brh.dependente.data_nascimento, brh.dependente.parentesco
+from brh.colaborador 
+inner join brh.dependente 
+on brh.dependente.colaborador = brh.colaborador.matricula
+order by brh.colaborador.nome, brh.dependente.nome;
+
+-- EXCLUSÃO DEPARTAMENTO SECAP
+
+--consulta
+select * from brh.colaborador where departamento = 'SECAP'
+-- matrículas impactadas = H123, M123, R123, W123
+
+--exclusão dependentes
+delete from brh.dependente where colaborador = 'H123'
+delete from brh.dependente where colaborador = 'M123'
+delete from brh.dependente where colaborador = 'R123'
+delete from brh.dependente where colaborador = 'W123'
+
+--exclusão e-mail
+
+delete from brh.email_colaborador where colaborador = 'H123'
+delete from brh.email_colaborador where colaborador = 'M123'
+delete from brh.email_colaborador where colaborador = 'R123'
+delete from brh.email_colaborador where colaborador = 'W123'
+
+-- exclusão telefone
+
+delete from brh.telefone_colaborador where colaborador = 'H123'
+delete from brh.telefone_colaborador where colaborador = 'M123'
+delete from brh.telefone_colaborador where colaborador = 'R123'
+delete from brh.telefone_colaborador where colaborador = 'W123'
+
+-- exclusão colaborador
+
+delete from brh.colaborador where matricula = 'H123'
+delete from brh.colaborador where matricula = 'M123'
+delete from brh.colaborador where matricula = 'R123'
+delete from brh.colaborador where matricula = 'W123'
+
+-- exclusão departamento
+
+delete from brh.departamento where sigla = 'SECAP'
+
+-- RELATÓRIO DE CONTATO DOS COLABORADORES (APÓS EXTINÇÃO DO SECAP)
+
+select brh.colaborador.nome, brh.email_colaborador.email, brh.telefone_colaborador.numero
+from brh.colaborador 
+inner join brh.email_colaborador 
+on brh.colaborador.matricula = brh.email_colaborador.colaborador
+inner join brh.telefone_colaborador
+on brh.colaborador.matricula = brh.telefone_colaborador.colaborador
+where brh.email_colaborador.tipo = 'T' and brh.telefone_colaborador.tipo = 'M'
+order by nome
+
+
+
+
+
+
+
+
